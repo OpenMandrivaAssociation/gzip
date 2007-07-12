@@ -1,9 +1,9 @@
 Name:		gzip
 Summary:	The GNU data compression program
-Version:	1.3.11
-Release:	%mkrel 5
+Version:	1.3.12
+Release:	%mkrel 1
 Source0:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz
-Patch0:		gzip-1.3.9-openbsd-owl-tmp.patch
+Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
 Patch1:		gzip-1.3.5-zforce.patch
 Patch3:		gzip-1.3.9-stderr.patch
 Patch4:		gzip-1.3.10-zgreppipe.patch
@@ -15,8 +15,8 @@ Patch13:	gzip-1.3.5-cve-2006-4336.patch
 Patch14:	gzip-1.3.5-cve-2006-4338.patch
 Patch15:	gzip-1.3.9-cve-2006-4337.patch
 Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
-
-URL:		http://www.gzip.org/
+Patch17:	%{name}-1.3.12-futimens.patch
+URL:		http://www.gzip.org
 License:	GPL
 Group:		Archiving/Compression
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -46,44 +46,48 @@ very commonly used data compression program.
 %patch14 -p1 -b .4338
 %patch15 -p1 -b .4337
 %patch16 -p1 -b .4337l
+%patch17 -p1 -b .futimens
 
 %build
 export DEFS="-DNO_ASM"
-%{configure2_5x}
-%{make}
+export CPPFLAGS="-DHAVE_LSTAT"
+
+%configure2_5x
+
+%make
+
+%check
+make check
 
 %install
 rm -rf %{buildroot}
-install -d $RPM_BUILD_ROOT%{_mandir}
 
-%{makeinstall} mandir=$RPM_BUILD_ROOT%{_mandir}
+%makeinstall_std 
 
-install -d $RPM_BUILD_ROOT/bin
+install -d %{buildroot}/bin
 
 for i in gzip gunzip zcat; do
-    mv -f $RPM_BUILD_ROOT%{_bindir}/$i $RPM_BUILD_ROOT/bin/$i
-    ln -sf ../../bin/$i $RPM_BUILD_ROOT%{_bindir}/$i
+    mv -f %{buildroot}%{_bindir}/$i %{buildroot}/bin/$i
+    ln -sf ../../bin/$i %{buildroot}%{_bindir}/$i
 done
 
 for i in zcmp zdiff zforce zgrep zmore znew ; do
-	sed -e "s|$RPM_BUILD_ROOT||g" < $RPM_BUILD_ROOT%{_bindir}/$i > $RPM_BUILD_ROOT%{_bindir}/.$i
-	rm -f $RPM_BUILD_ROOT%{_bindir}/$i
-	mv $RPM_BUILD_ROOT%{_bindir}/.$i $RPM_BUILD_ROOT%{_bindir}/$i
-	chmod 755 $RPM_BUILD_ROOT%{_bindir}/$i
+	sed -e "s|%{buildroot}||g" < %{buildroot}%{_bindir}/$i > %{buildroot}%{_bindir}/.$i
+	rm -f %{buildroot}%{_bindir}/$i
+	mv %{buildroot}%{_bindir}/.$i %{buildroot}%{_bindir}/$i
+	chmod 755 %{buildroot}%{_bindir}/$i
 done
 
 # uncompress is a part of ncompress package
-rm -f ${RPM_BUILD_ROOT}%{_bindir}/uncompress
+rm -f %{buildroot}%{_bindir}/uncompress
 
-cat > $RPM_BUILD_ROOT%{_bindir}/zless <<EOF
+cat > %{buildroot}%{_bindir}/zless <<EOF
 #!/bin/sh
 export LESSOPEN="|lesspipe.sh %s"
 less "\$@"
 EOF
-chmod 755 $RPM_BUILD_ROOT%{_bindir}/zless
+chmod 755 %{buildroot}%{_bindir}/zless
 
-%check
-%{make} check
 
 %post
 %_install_info %{name}.info
@@ -92,14 +96,12 @@ chmod 755 $RPM_BUILD_ROOT%{_bindir}/zless
 %_remove_install_info %{name}.info
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc NEWS README
+%doc NEWS README AUTHORS ChangeLog
 /bin/*
 %{_bindir}/*
 %{_mandir}/*/*
 %{_infodir}/*
-
-
