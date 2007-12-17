@@ -19,7 +19,6 @@ Patch17:	%{name}-1.3.12-futimens.patch
 URL:		http://www.gzip.org
 License:	GPL
 Group:		Archiving/Compression
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(pre):	info-install
 Requires(preun): info-install
 Requires:	mktemp less
