@@ -1,7 +1,7 @@
 Name:		gzip
 Summary:	The GNU data compression program
 Version:	1.3.12
-Release:	%mkrel 3
+Release:	%mkrel 4
 Source0:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz
 Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
 Patch1:		gzip-1.3.5-zforce.patch
@@ -36,7 +36,7 @@ very commonly used data compression program.
 %prep
 %setup -q
 %patch0 -p1 -b .owl-tmp
-%patch1 -p1 -b .zforce
+%patch1 -p0 -b .zforce
 %patch3 -p1 -b .stderr
 %patch4 -p1 -b .nixi
 %patch5 -p1 -b .rsync
