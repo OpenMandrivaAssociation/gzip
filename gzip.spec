@@ -1,8 +1,9 @@
 Name:		gzip
 Summary:	The GNU data compression program
-Version:	1.3.13
+Version:	1.3.14
 Release:	%mkrel 1
 Source0:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz
+Source1:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz.sig
 Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
 Patch1:		gzip-1.3.5-zforce.patch
 Patch3:		gzip-1.3.9-stderr.patch
@@ -15,7 +16,8 @@ Patch13:	gzip-1.3.5-cve-2006-4336.patch
 Patch14:	gzip-1.3.5-cve-2006-4338.patch
 Patch15:	gzip-1.3.9-cve-2006-4337.patch
 Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
-Patch18:	gzip-1.3.12-zdiff-compressed.patch
+Patch17:	gzip-1.3.14-CVE-2009-2624-1.diff
+Patch18:	gzip-1.3.14-gzip-CVE-2010-0001.diff
 URL:		http://www.gzip.org
 License:	GPL
 Group:		Archiving/Compression
@@ -46,7 +48,8 @@ very commonly used data compression program.
 %patch14 -p1 -b .4338
 %patch15 -p1 -b .4337
 %patch16 -p1 -b .4337l
-%patch18 -p1 -b .zdiff-compressed
+%patch17 -p0 -b .CVE-2009-2624-1
+%patch18 -p1 -b .CVE-2010-0001
 
 %build
 export DEFS="-DNO_ASM"
