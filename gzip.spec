@@ -1,7 +1,7 @@
 Name:		gzip
 Summary:	The GNU data compression program
 Version:	1.4
-Release:	%mkrel 3
+Release:	%mkrel 4
 Source0:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz
 Source1:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz.sig
 Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
@@ -18,20 +18,28 @@ Patch15:	gzip-1.3.9-cve-2006-4337.patch
 Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
 Patch17:	gzip-1.3.14-CVE-2009-2624-1.diff
 URL:		http://www.gzip.org
-License:	GPL
+License:	GPLv3+
 Group:		Archiving/Compression
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(pre):	info-install
 Requires(preun): info-install
 Requires:	mktemp less
 BuildRequires:	texinfo
+Suggests:	%{name}-utils
 
 %description
 The gzip package contains the popular GNU gzip data compression
-program. Gzipped files have a .gz extension.  
+program. Gzipped files have a .gz extension.
 
 Gzip should be installed on your Mandriva Linux system, because it is a
 very commonly used data compression program.
+
+%package utils
+Summary:	Utilities dealing with gzip compressed files
+Requires:	gzip = %{version}
+
+%description utils
+The gzip-utils package contains programs for manipulating gzip-compressed
+archives: zcat, zcmp, zdiff, zgrep.
 
 %prep
 %setup -q
@@ -63,7 +71,7 @@ make check
 %install
 rm -rf %{buildroot}
 
-%makeinstall_std 
+%makeinstall_std
 
 install -d %{buildroot}/bin
 
@@ -102,7 +110,33 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc NEWS README AUTHORS ChangeLog
-/bin/*
-%{_bindir}/*
-%{_mandir}/*/*
+/bin/gzip
+/bin/gunzip
+%{_mandir}/man1/gunzip.1*
+%{_mandir}/man1/gzexe.1*
+%{_mandir}/man1/gzip.1*
+%{_mandir}/man1/zforce.1*
+%{_mandir}/man1/zless.1*
+%{_mandir}/man1/zmore.1*
+%{_mandir}/man1/znew.1*
 %{_infodir}/*
+%{_bindir}/gunzip
+%{_bindir}/gzexe
+%{_bindir}/gzip
+%{_bindir}/zforce
+%{_bindir}/zless
+%{_bindir}/zmore
+%{_bindir}/znew
+
+%files utils
+/bin/zcat
+%{_bindir}/zcat
+%{_bindir}/zcmp
+%{_bindir}/zdiff
+%{_bindir}/zegrep
+%{_bindir}/zfgrep
+%{_bindir}/zgrep
+%{_mandir}/man1/zcat.1*
+%{_mandir}/man1/zcmp.1*
+%{_mandir}/man1/zdiff.1*
+%{_mandir}/man1/zgrep.1*
