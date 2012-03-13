@@ -1,7 +1,7 @@
 Name:		gzip
 Summary:	The GNU data compression program
 Version:	1.4
-Release:	%mkrel 4
+Release:	%mkrel 5
 Source0:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz
 Source1:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz.sig
 Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
@@ -24,7 +24,6 @@ Requires(pre):	info-install
 Requires(preun): info-install
 Requires:	mktemp less
 BuildRequires:	texinfo
-Suggests:	%{name}-utils
 
 %description
 The gzip package contains the popular GNU gzip data compression
