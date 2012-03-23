@@ -1,7 +1,7 @@
 Name:		gzip
 Summary:	The GNU data compression program
 Version:	1.4
-Release:	%mkrel 5
+Release:	6
 Source0:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz
 Source1:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz.sig
 Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
@@ -21,7 +21,7 @@ URL:		http://www.gzip.org
 License:	GPLv3+
 Group:		Archiving/Compression
 Requires(pre):	info-install
-Requires(preun): info-install
+Requires(preun):info-install
 Requires:	mktemp less
 BuildRequires:	texinfo
 
@@ -32,11 +32,11 @@ program. Gzipped files have a .gz extension.
 Gzip should be installed on your Mandriva Linux system, because it is a
 very commonly used data compression program.
 
-%package utils
+%package	utils
 Summary:	Utilities dealing with gzip compressed files
 Requires:	gzip = %{version}
 
-%description utils
+%description	utils
 The gzip-utils package contains programs for manipulating gzip-compressed
 archives: zcat, zcmp, zdiff, zgrep.
 
@@ -59,17 +59,13 @@ archives: zcat, zcmp, zdiff, zgrep.
 %build
 export DEFS="-DNO_ASM"
 export CPPFLAGS="-DHAVE_LSTAT"
-
 %configure2_5x
-
 %make
 
 %check
 make check
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
 
 install -d %{buildroot}/bin
@@ -96,18 +92,7 @@ less "\$@"
 EOF
 chmod 755 %{buildroot}%{_bindir}/zless
 
-
-%post
-%_install_info %{name}.info
-
-%preun
-%_remove_install_info %{name}.info
-
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc NEWS README AUTHORS ChangeLog
 /bin/gzip
 /bin/gunzip
