@@ -1,7 +1,10 @@
 Name:		gzip
 Summary:	The GNU data compression program
 Version:	1.4
-Release:	6
+Release:	7
+License:	GPLv3+
+Group:		Archiving/Compression
+URL:		http://www.gzip.org
 Source0:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz
 Source1:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz.sig
 Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
@@ -17,13 +20,9 @@ Patch14:	gzip-1.3.5-cve-2006-4338.patch
 Patch15:	gzip-1.3.9-cve-2006-4337.patch
 Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
 Patch17:	gzip-1.3.14-CVE-2009-2624-1.diff
-URL:		http://www.gzip.org
-License:	GPLv3+
-Group:		Archiving/Compression
-Requires(pre):	info-install
-Requires(preun):info-install
-Requires:	mktemp less
 BuildRequires:	texinfo
+Requires:	mktemp
+Requires:	less
 
 %description
 The gzip package contains the popular GNU gzip data compression
