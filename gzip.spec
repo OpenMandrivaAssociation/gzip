@@ -1,17 +1,16 @@
 Name:		gzip
 Summary:	The GNU data compression program
-Version:	1.4
-Release:	7
+Version:	1.5
+Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
 URL:		http://www.gzip.org
-Source0:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz
-Source1:	ftp://alpha.gnu.org/pub/gnu/gzip/gzip-%{version}.tar.gz.sig
+Source0:	ftp://ftp.gnu.org/gnu/gzip/gzip-%{version}.tar.gz
+Source1:	ftp://ftp.gnu.org/gnu/gzip/gzip-%{version}.tar.gz.sig
 Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
 Patch1:		gzip-1.3.5-zforce.patch
-Patch3:		gzip-1.3.9-stderr.patch
 Patch4:		gzip-1.3.10-zgreppipe.patch
-Patch5:		gzip-1.3.13-rsync.patch
+Patch5:		gzip-1.5-rsync.diff
 Patch6:		gzip-1.3.3-window-size.patch
 Patch7:		gzip-1.3.9-addsuffix.patch
 Patch12:	gzip-1.3.5-cve-2006-4335.patch
@@ -43,7 +42,6 @@ archives: zcat, zcmp, zdiff, zgrep.
 %setup -q
 %patch0 -p1 -b .owl-tmp
 %patch1 -p0 -b .zforce
-%patch3 -p1 -b .stderr
 %patch4 -p1 -b .nixi
 %patch5 -p1 -b .rsync
 %patch6 -p1 -b .window-size
