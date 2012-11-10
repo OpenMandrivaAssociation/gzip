@@ -1,0 +1,22 @@
+diff -Naur gzip-1.5/zmore.in gzip-1.5.oden/zmore.in
+--- gzip-1.5/zmore.in	2012-01-01 09:53:58.000000000 +0100
++++ gzip-1.5.oden/zmore.in	2012-06-20 16:30:41.000000000 +0200
+@@ -70,7 +70,7 @@
+         --v*) exec echo "$version";;
+         esac
+ 
+-        < "$FILE" || continue
++       if test -e $FILE || test -e $FILE.gz; then 
+         if test $FIRST -eq 0; then
+                 echo $n1 "--More--(Next file: $FILE)$n2"
+                 stty $cb -echo 2>/dev/null
+@@ -87,6 +87,8 @@
+         fi
+         if test -t 1; then
+                 FIRST=0
+-        fi
++  	fi
++	else < $FILE
++	fi
+     done
+ fi
