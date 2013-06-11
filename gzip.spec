@@ -1,7 +1,7 @@
 Summary:	The GNU data compression program
 Name:		gzip
-Version:	1.5
-Release:	2
+Version:	1.6
+Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
@@ -12,9 +12,7 @@ Patch1:		gzip-1.3.5-zforce.patch
 Patch4:		gzip-1.3.10-zgreppipe.patch
 Patch5:		gzip-1.5-rsync.diff
 Patch6:		gzip-1.3.3-window-size.patch
-Patch7:		gzip-1.3.9-addsuffix.patch
 Patch12:	gzip-1.3.5-cve-2006-4335.patch
-Patch13:	gzip-1.3.5-cve-2006-4336.patch
 Patch14:	gzip-1.3.5-cve-2006-4338.patch
 Patch15:	gzip-1.3.9-cve-2006-4337.patch
 Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
