@@ -41,9 +41,10 @@ archives: zcat, zcmp, zdiff, zgrep.
 %apply_patches
 
 %build
+%global optflags %{optflags} -Ofast
 export DEFS="-DNO_ASM"
 export CPPFLAGS="-DHAVE_LSTAT"
-%configure2_5x
+%configure
 %make
 
 %check
