@@ -1,7 +1,7 @@
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.6
-Release:	10
+Release:	11
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
@@ -18,8 +18,8 @@ Patch15:	gzip-1.3.9-cve-2006-4337.patch
 Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
 Patch17:	gzip-1.3.14-CVE-2009-2624-1.diff
 BuildRequires:	texinfo
-Requires:	mktemp
-Requires:	less
+# (tpg) this is a part of basesystem package
+# Requires:	less
 
 %description
 The gzip package contains the popular GNU gzip data compression
@@ -41,9 +41,9 @@ archives: zcat, zcmp, zdiff, zgrep.
 %apply_patches
 
 %build
-%global optflags %{optflags} -Ofast
 export DEFS="-DNO_ASM"
 export CPPFLAGS="-DHAVE_LSTAT"
+
 %configure
 %make
 
@@ -109,4 +109,3 @@ chmod 755 %{buildroot}%{_bindir}/zless
 %{_mandir}/man1/zcmp.1*
 %{_mandir}/man1/zdiff.1*
 %{_mandir}/man1/zgrep.1*
-
