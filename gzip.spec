@@ -19,7 +19,8 @@ Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
 Patch17:	gzip-1.3.14-CVE-2009-2624-1.diff
 BuildRequires:	texinfo
 # (tpg) this is a part of basesystem package
-# Requires:	less
+# (itchka) Needed it for the test package
+BuildRequires:	less
 
 %description
 The gzip package contains the popular GNU gzip data compression
