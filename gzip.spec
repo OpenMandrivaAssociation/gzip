@@ -1,16 +1,13 @@
 Summary:	The GNU data compression program
 Name:		gzip
-Version:	1.6
-Release:	11
+Version:	1.7
+Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/gzip-%{version}.tar.gz
 Source1:	ftp://ftp.gnu.org/gnu/gzip/gzip-%{version}.tar.gz.sig
-Patch0:		gzip-1.3.12-openbsd-owl-tmp.patch
 Patch1:		gzip-1.3.5-zforce.patch
-Patch4:		gzip-1.3.10-zgreppipe.patch
-Patch5:		gzip-1.5-rsync.diff
 Patch6:		gzip-1.3.3-window-size.patch
 Patch12:	gzip-1.3.5-cve-2006-4335.patch
 Patch14:	gzip-1.3.5-cve-2006-4338.patch

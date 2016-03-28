@@ -1,5 +1,2 @@
-removed_sources:
-  gzip-1.5.tar.gz: 56a80da7b032107372d3f3343bed7c7af452a826
 sources:
-  gzip-1.6.tar.gz: 7ec6403090b3eaeb53ef017223cb8034eebc1f49
-  gzip-1.6.tar.gz.sig: a41900f280fe8e078697092ae6cd7d47425abf16
+  gzip-1.7.tar.gz: 385421f97f435e0da95aec0969beedeae4c1de38
