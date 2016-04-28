@@ -1,6 +1,6 @@
 Summary:	The GNU data compression program
 Name:		gzip
-Version:	1.7
+Version:	1.8
 Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
