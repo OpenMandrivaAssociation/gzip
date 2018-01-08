@@ -3,8 +3,8 @@
 
 Summary:	The GNU data compression program
 Name:		gzip
-Version:	1.8
-Release:	2
+Version:	1.9
+Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
@@ -17,6 +17,7 @@ Patch14:	gzip-1.3.5-cve-2006-4338.patch
 Patch15:	gzip-1.3.9-cve-2006-4337.patch
 Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
 Patch17:	gzip-1.3.14-CVE-2009-2624-1.diff
+Patch18:	gzip-1.9-clang.patch
 BuildRequires:	texinfo
 # (tpg) this is a part of basesystem package
 # (itchka) Needed it for the test package
