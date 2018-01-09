@@ -1,6 +1,6 @@
---- ./zforce.in	2007-02-05 21:54:26.000000000 +0100
-+++ ./zforce.in.oden	2008-12-19 16:39:43.000000000 +0100
-@@ -58,7 +58,7 @@
+--- gzip-1.9/zforce.in.0001~	2018-01-08 20:52:59.546672777 +0100
++++ gzip-1.9/zforce.in	2018-01-08 20:53:47.080809205 +0100
+@@ -56,7 +56,7 @@ for i do
      continue
    fi
  
@@ -8,4 +8,4 @@
 +  if gzip -l < "$i" 2>/dev/null | grep '^compressed' > /dev/null; then
  
      new="$i.gz"
-     if mv "$i" "$new"; then
+     mv "$i" "$new" && printf '%s\n' "$i -- replaced with $new" || res=1
