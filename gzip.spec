@@ -4,19 +4,11 @@
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.9
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
-Source0:	ftp://ftp.gnu.org/gnu/gzip/gzip-%{version}.tar.gz
-Source1:	ftp://ftp.gnu.org/gnu/gzip/gzip-%{version}.tar.gz.sig
-Patch1:		gzip-1.3.5-zforce.patch
-Patch6:		gzip-1.3.3-window-size.patch
-Patch12:	gzip-1.3.5-cve-2006-4335.patch
-Patch14:	gzip-1.3.5-cve-2006-4338.patch
-Patch15:	gzip-1.3.9-cve-2006-4337.patch
-Patch16:	gzip-1.3.5-cve-2006-4337_len.patch
-Patch17:	gzip-1.3.14-CVE-2009-2624-1.diff
+Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
 Patch18:	gzip-1.9-clang.patch
 BuildRequires:	texinfo
 # (tpg) this is a part of basesystem package
@@ -30,11 +22,11 @@ program. Gzipped files have a .gz extension.
 Gzip should be installed on your Mandriva Linux system, because it is a
 very commonly used data compression program.
 
-%package	utils
+%package utils
 Summary:	Utilities dealing with gzip compressed files
-Requires:	gzip = %{version}
+Requires:	%{name} = %{version}
 
-%description	utils
+%description utils
 The gzip-utils package contains programs for manipulating gzip-compressed
 archives: zcat, zcmp, zdiff, zgrep.
 
