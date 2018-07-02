@@ -1,10 +1,10 @@
 # (tpg) optimize it a bit
-%global optflags %optflags -Ofast
+%global optflags %optflags -Ofast --rtlib=compiler-rt
 
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.9
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
