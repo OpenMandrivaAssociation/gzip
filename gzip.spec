@@ -4,7 +4,7 @@
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.9
-Release:	4
+Release:	5
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
