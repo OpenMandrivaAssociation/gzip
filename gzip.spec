@@ -9,6 +9,7 @@ License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
+Patch0:	gnulib.patch
 Patch18:	gzip-1.9-clang.patch
 BuildRequires:	texinfo
 # (tpg) this is a part of basesystem package
@@ -33,21 +34,20 @@ The gzip-utils package contains programs for manipulating gzip-compressed
 archives: zcat, zcmp, zdiff, zgrep.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 export DEFS="-DNO_ASM"
 export CPPFLAGS="-DHAVE_LSTAT"
 
 %configure
-%make
+%make_build
 
 %check
 make check
 
 %install
-%makeinstall_std
+%make_install
 
 install -d %{buildroot}/bin
 
