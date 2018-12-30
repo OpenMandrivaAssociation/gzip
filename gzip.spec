@@ -9,7 +9,8 @@ License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
-Patch0:	gnulib.patch
+#Disable upstream patch.
+#Patch0:	gnulib.patch
 Patch18:	gzip-1.9-clang.patch
 BuildRequires:	texinfo
 # (tpg) this is a part of basesystem package
