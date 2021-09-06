@@ -1,0 +1,32 @@
+diff -up gzip-1.11/lib/config.hin.omv~ gzip-1.11/lib/config.hin
+--- gzip-1.11/lib/config.hin.omv~	2021-09-06 13:47:09.232500666 +0200
++++ gzip-1.11/lib/config.hin	2021-09-06 13:47:43.921648476 +0200
+@@ -1517,7 +1517,11 @@
+    can be freed via 'free'; it can be used only after including <stdlib.h>.  */
+ /* Applies to: functions.  Cannot be used on inline functions.  */
+ #if _GL_GNUC_PREREQ (11, 0)
+-# define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
++# ifdef __clang__
++#  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__))
++# else
++#  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
++# endif
+ #else
+ # define _GL_ATTRIBUTE_DEALLOC(f, i)
+ #endif
+diff -up gzip-1.11/m4/gnulib-common.m4.omv~ gzip-1.11/m4/gnulib-common.m4
+--- gzip-1.11/m4/gnulib-common.m4.omv~	2021-09-06 13:54:25.637379588 +0200
++++ gzip-1.11/m4/gnulib-common.m4	2021-09-06 13:54:49.412482879 +0200
+@@ -177,7 +177,11 @@ AC_DEFUN([gl_COMMON_BODY], [
+    can be freed via 'free'; it can be used only after including <stdlib.h>.  */
+ /* Applies to: functions.  Cannot be used on inline functions.  */
+ #if _GL_GNUC_PREREQ (11, 0)
+-# define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
++# ifdef __clang__
++#  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__))
++# else
++#  define _GL_ATTRIBUTE_DEALLOC(f, i) __attribute__ ((__malloc__ (f, i)))
++# endif
+ #else
+ # define _GL_ATTRIBUTE_DEALLOC(f, i)
+ #endif

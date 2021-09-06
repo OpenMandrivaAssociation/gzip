@@ -5,15 +5,15 @@
 
 Summary:	The GNU data compression program
 Name:		gzip
-Version:	1.10
-Release:	4
+Version:	1.11
+Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
 #Disable upstream patch.
 #Patch0:	gnulib.patch
-Patch18:	gzip-1.9-clang.patch
+Patch1:		gzip-1.11-clang.patch
 BuildRequires:	texinfo
 # (tpg) this is a part of basesystem package
 # (itchka) Needed it for the test package
