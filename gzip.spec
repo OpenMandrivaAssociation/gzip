@@ -6,7 +6,7 @@
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.11
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
@@ -85,14 +85,14 @@ chmod 755 %{buildroot}%{_bindir}/zless
 %doc NEWS README AUTHORS ChangeLog
 /bin/gzip-st
 /bin/gunzip-st
-%{_mandir}/man1/gunzip.1*
-%{_mandir}/man1/gzexe.1*
-%{_mandir}/man1/gzip.1*
-%{_mandir}/man1/zforce.1*
-%{_mandir}/man1/zless.1*
-%{_mandir}/man1/zmore.1*
-%{_mandir}/man1/znew.1*
-%{_infodir}/*
+%doc %{_mandir}/man1/gunzip.1*
+%doc %{_mandir}/man1/gzexe.1*
+%doc %{_mandir}/man1/gzip.1*
+%doc %{_mandir}/man1/zforce.1*
+%doc %{_mandir}/man1/zless.1*
+%doc %{_mandir}/man1/zmore.1*
+%doc %{_mandir}/man1/znew.1*
+%doc %{_infodir}/*
 %{_bindir}/gunzip-st
 %{_bindir}/gzexe
 %{_bindir}/gzip
@@ -109,7 +109,7 @@ chmod 755 %{buildroot}%{_bindir}/zless
 %{_bindir}/zegrep
 %{_bindir}/zfgrep
 %{_bindir}/zgrep
-%{_mandir}/man1/zcat.1*
-%{_mandir}/man1/zcmp.1*
-%{_mandir}/man1/zdiff.1*
-%{_mandir}/man1/zgrep.1*
+%doc %{_mandir}/man1/zcat.1*
+%doc %{_mandir}/man1/zcmp.1*
+%doc %{_mandir}/man1/zdiff.1*
+%doc %{_mandir}/man1/zgrep.1*
