@@ -1,12 +1,15 @@
 # (tpg) optimize it a bit
 %ifnarch %{riscv}
-%global optflags %optflags -O3 --rtlib=compiler-rt
+%global optflags %{optflags} -O3 --rtlib=compiler-rt
 %endif
+
+# (tpg) enable PGO build
+%bcond_without pgo
 
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.11
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
@@ -43,7 +46,30 @@ archives: zcat, zcmp, zdiff, zgrep.
 export DEFS="-DNO_ASM"
 export CPPFLAGS="-DHAVE_LSTAT"
 
+%if %{with pgo}
+export LD_LIBRARY_PATH="$(pwd)"
+
+CFLAGS="%{optflags} -fprofile-generate" \
+CXXFLAGS="%{optflags} -fprofile-generate" \
+LDFLAGS="%{build_ldflags} -fprofile-generate" \
 %configure
+
+%make_build
+
+make check
+
+unset LD_LIBRARY_PATH
+llvm-profdata merge --output=%{name}-llvm.profdata *.profraw
+PROFDATA="$(realpath %{name}-llvm.profdata)"
+rm -f *.profraw
+make clean
+
+CFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
+CXXFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
+LDFLAGS="%{build_ldflags} -fprofile-use=$PROFDATA" \
+%endif
+%configure
+
 %make_build
 
 %check
@@ -60,10 +86,10 @@ for i in gzip gunzip zcat; do
 done
 
 for i in zcmp zdiff zforce zgrep zmore znew ; do
-	sed -e "s|%{buildroot}||g" < %{buildroot}%{_bindir}/"$i" > %{buildroot}%{_bindir}/."$i"
-	rm -f %{buildroot}%{_bindir}/"$i"
-	mv %{buildroot}%{_bindir}/."$i" %{buildroot}%{_bindir}/"$i"
-	chmod 755 %{buildroot}%{_bindir}/"$i"
+    sed -e "s|%{buildroot}||g" < %{buildroot}%{_bindir}/"$i" > %{buildroot}%{_bindir}/."$i"
+    rm -f %{buildroot}%{_bindir}/"$i"
+    mv %{buildroot}%{_bindir}/."$i" %{buildroot}%{_bindir}/"$i"
+    chmod 755 %{buildroot}%{_bindir}/"$i"
 done
 
 # (tpg) we are using pigz, so move these
