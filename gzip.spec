@@ -9,7 +9,7 @@
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.11
-Release:	3
+Release:	4
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
@@ -59,7 +59,7 @@ LDFLAGS="%{build_ldflags} -fprofile-generate" \
 make check
 
 unset LD_LIBRARY_PATH
-llvm-profdata merge --output=%{name}-llvm.profdata *.profraw
+llvm-profdata merge --output=%{name}-llvm.profdata $(find . -name "*.profraw" -type f)
 PROFDATA="$(realpath %{name}-llvm.profdata)"
 rm -f *.profraw
 make clean
