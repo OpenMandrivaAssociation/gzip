@@ -14,8 +14,6 @@ License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
-#Disable upstream patch.
-#Patch0:	gnulib.patch
 Patch1:		gzip-1.11-clang.patch
 BuildRequires:	texinfo
 # (tpg) this is a part of basesystem package
@@ -115,6 +113,7 @@ chmod 755 %{buildroot}%{_bindir}/zless
 %doc %{_mandir}/man1/zmore.1*
 %doc %{_mandir}/man1/znew.1*
 %doc %{_infodir}/*
+%{_bindir}/gzip-st
 %{_bindir}/gunzip-st
 %{_bindir}/gzexe
 %{_bindir}/zforce
