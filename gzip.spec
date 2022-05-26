@@ -9,7 +9,7 @@
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.12
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
@@ -79,10 +79,11 @@ make check
 %make_install
 
 install -d %{buildroot}/bin
-
-for i in gzip gunzip zcat; do
-    mv -f %{buildroot}%{_bindir}/"$i" %{buildroot}/bin/"$i"
-    ln -sf ../../bin/"$i" %{buildroot}%{_bindir}/"$i"
+ln -sf %{_bindir}/zcat %{buildroot}/bin/zcat
+# (tpg) we are using pigz, so move these
+for i in gzip gunzip; do
+    mv %{buildroot}%{_bindir}/$i %{buildroot}%{_bindir}/$i-st
+    ln -sf %{_bindir}/$i-st %{buildroot}/bin/$i-st
 done
 
 for i in zcmp zdiff zforce zgrep zmore znew ; do
@@ -90,11 +91,6 @@ for i in zcmp zdiff zforce zgrep zmore znew ; do
     rm -f %{buildroot}%{_bindir}/"$i"
     mv %{buildroot}%{_bindir}/."$i" %{buildroot}%{_bindir}/"$i"
     chmod 755 %{buildroot}%{_bindir}/"$i"
-done
-
-# (tpg) we are using pigz, so move these
-for i in /bin/gzip /bin/gunzip /usr/bin/gunzip; do
-    mv %{buildroot}"$i" %{buildroot}"$i"-st
 done
 
 # uncompress is a part of ncompress package
@@ -121,7 +117,6 @@ chmod 755 %{buildroot}%{_bindir}/zless
 %doc %{_infodir}/*
 %{_bindir}/gunzip-st
 %{_bindir}/gzexe
-%{_bindir}/gzip
 %{_bindir}/zforce
 %{_bindir}/zless
 %{_bindir}/zmore
