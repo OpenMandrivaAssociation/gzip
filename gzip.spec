@@ -9,7 +9,7 @@
 Summary:	The GNU data compression program
 Name:		gzip
 Version:	1.12
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
@@ -76,12 +76,9 @@ make check
 %install
 %make_install
 
-install -d %{buildroot}/bin
-ln -sf %{_bindir}/zcat %{buildroot}/bin/zcat
 # (tpg) we are using pigz, so move these
 for i in gzip gunzip; do
     mv %{buildroot}%{_bindir}/$i %{buildroot}%{_bindir}/$i-st
-    ln -sf %{_bindir}/$i-st %{buildroot}/bin/$i-st
 done
 
 for i in zcmp zdiff zforce zgrep zmore znew ; do
@@ -103,8 +100,6 @@ chmod 755 %{buildroot}%{_bindir}/zless
 
 %files
 %doc NEWS README AUTHORS ChangeLog
-/bin/gzip-st
-/bin/gunzip-st
 %doc %{_mandir}/man1/gunzip.1*
 %doc %{_mandir}/man1/gzexe.1*
 %doc %{_mandir}/man1/gzip.1*
@@ -122,7 +117,6 @@ chmod 755 %{buildroot}%{_bindir}/zless
 %{_bindir}/znew
 
 %files utils
-/bin/zcat
 %{_bindir}/zcat
 %{_bindir}/zcmp
 %{_bindir}/zdiff
