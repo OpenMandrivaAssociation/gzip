@@ -4,7 +4,11 @@
 %endif
 
 # (tpg) enable PGO build
+%if %{cross_compiling}
+%bcond_with pgo
+%else
 %bcond_without pgo
+%endif
 
 Summary:	The GNU data compression program
 Name:		gzip
@@ -70,8 +74,10 @@ LDFLAGS="%{build_ldflags} -fprofile-use=$PROFDATA" \
 
 %make_build
 
+%if ! %{cross_compiling}
 %check
 make check
+%endif
 
 %install
 %make_install
