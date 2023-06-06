@@ -1,7 +1,5 @@
 # (tpg) optimize it a bit
-%ifnarch %{riscv}
-%global optflags %{optflags} -O3 --rtlib=compiler-rt
-%endif
+%global optflags %{optflags} -O3
 
 # (tpg) enable PGO build
 %if %{cross_compiling}
