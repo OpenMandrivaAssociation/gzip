@@ -10,8 +10,8 @@
 
 Summary:	The GNU data compression program
 Name:		gzip
-Version:	1.12
-Release:	4
+Version:	1.13
+Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		http://www.gzip.org
