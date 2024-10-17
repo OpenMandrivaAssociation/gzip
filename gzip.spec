@@ -14,7 +14,7 @@ Version:	1.13
 Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
-Url:		http://www.gzip.org
+Url:		https://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
 Patch1:		gzip-1.11-clang.patch
 BuildRequires:	texinfo
