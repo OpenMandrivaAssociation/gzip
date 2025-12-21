@@ -17,6 +17,11 @@ Group:		Archiving/Compression
 Url:		https://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
 Patch1:		gzip-1.11-clang.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	texinfo
 # (tpg) this is a part of basesystem package
 # (itchka) Needed it for the test package
