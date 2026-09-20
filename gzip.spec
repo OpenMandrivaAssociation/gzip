@@ -48,13 +48,13 @@ archives: zcat, zcmp, zdiff, zgrep.
 export DEFS="-DNO_ASM"
 export CPPFLAGS="-DHAVE_LSTAT"
 
-# declarative autotools is out-of-tree
+# declarative autotools is out-of-tree (_OMV_rpm_build)
 %pgo
-%make_build -C %{_vpath_builddir} check
+%make_build -C _OMV_rpm_build check
 
 %if ! %{cross_compiling}
 %check
-%make_build -C %{_vpath_builddir} check
+%make_build -C _OMV_rpm_build check
 %endif
 
 %install -a
