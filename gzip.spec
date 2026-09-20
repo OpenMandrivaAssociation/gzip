@@ -10,16 +10,16 @@
 
 Summary:	The GNU data compression program
 Name:		gzip
-Version:	1.14
+Version:	1.15
 Release:	1
 License:	GPLv3+
 Group:		Archiving/Compression
 Url:		https://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
 Patch1:		gzip-1.11-clang.patch
+BuildSystem:	autotools
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	texinfo
@@ -44,47 +44,19 @@ Requires:	%{name} = %{version}
 The gzip-utils package contains programs for manipulating gzip-compressed
 archives: zcat, zcmp, zdiff, zgrep.
 
-%prep
-%autosetup -p1
-
-%build
+%build -p
 export DEFS="-DNO_ASM"
 export CPPFLAGS="-DHAVE_LSTAT"
 
-%if %{with pgo}
-export LD_LIBRARY_PATH="$(pwd)"
-
-CFLAGS="%{optflags} -fprofile-generate" \
-CXXFLAGS="%{optflags} -fprofile-generate" \
-LDFLAGS="%{build_ldflags} -fprofile-generate" \
-%configure
-
-%make_build
-
+%pgo
 make check
-
-unset LD_LIBRARY_PATH
-llvm-profdata merge --output=%{name}-llvm.profdata $(find . -name "*.profraw" -type f)
-PROFDATA="$(realpath %{name}-llvm.profdata)"
-rm -f *.profraw
-make clean
-
-CFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
-CXXFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
-LDFLAGS="%{build_ldflags} -fprofile-use=$PROFDATA" \
-%endif
-%configure
-
-%make_build
 
 %if ! %{cross_compiling}
 %check
 make check
 %endif
 
-%install
-%make_install
-
+%install -a
 # (tpg) we are using pigz, so move these
 for i in gzip gunzip; do
     mv %{buildroot}%{_bindir}/$i %{buildroot}%{_bindir}/$i-st
