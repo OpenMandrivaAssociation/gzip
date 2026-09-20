@@ -49,8 +49,11 @@ export DEFS="-DNO_ASM"
 export CPPFLAGS="-DHAVE_LSTAT"
 
 # declarative autotools is out-of-tree (_OMV_rpm_build)
+# Do not use make check here: profile-generate dumps LLVM warnings on
+# stderr and several tests compare command output.
 %pgo
-%make_build -C _OMV_rpm_build check
+./_OMV_rpm_build/gzip -c README AUTHORS NEWS ChangeLog >/dev/null
+echo gzip-pgo-sample | ./_OMV_rpm_build/gzip | ./_OMV_rpm_build/gzip -d >/dev/null
 
 %if ! %{cross_compiling}
 %check
