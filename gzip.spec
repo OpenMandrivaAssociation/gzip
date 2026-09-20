@@ -17,6 +17,7 @@ Group:		Archiving/Compression
 Url:		https://www.gzip.org
 Source0:	ftp://ftp.gnu.org/gnu/gzip/%{name}-%{version}.tar.gz
 Patch1:		gzip-1.11-clang.patch
+Patch2:		gzip-1.15-aarch64-head-macro.patch
 BuildSystem:	autotools
 BuildRequires:	autoconf
 BuildRequires:	automake
